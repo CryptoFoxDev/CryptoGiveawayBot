@@ -39,7 +39,7 @@ def followUser(username):
         print(prefix + 'Already following @' + username)
     else:
         try:
-            #api.create_friendship(user_id=user.get('id'))
+            api.create_friendship(user_id=user.get('id'))
             print(prefix + 'Following @' + username)
         except:
             print(prefix_error + 'Could not follow user ' + username)
@@ -93,7 +93,7 @@ def joinGiveaway(tweet):
             print(prefix + 'Already liked the tweet' + Style.RESET_ALL)
         else:
             needs_like = True
-            #api.create_favorite(tweet.get('id'))
+            api.create_favorite(tweet.get('id'))
             print(prefix + 'Liked the tweet' + Style.RESET_ALL)
         
     if 'rt ' in tweet_content_low or 'retweet' in tweet_content_low or '+rt' in tweet_content_low or 'rt+' in tweet_content_low or 'rt,' in tweet_content_low or 'rt&' in tweet_content_low or ' rt' in tweet_content_low:
@@ -102,7 +102,7 @@ def joinGiveaway(tweet):
             print(prefix + 'Already retweeted the tweet...' + Style.RESET_ALL)
         else:
             needs_rt = True
-            #api.retweet(tweet.get('id'))
+            api.retweet(tweet.get('id'))
             print(prefix + 'Retweeted the tweet' + Style.RESET_ALL)
 
     if 'tag ' in tweet_content_low or 'mention' in tweet_content_low or 'friends' in tweet_content_low:
@@ -120,7 +120,7 @@ def joinGiveaway(tweet):
 
         print(prefix +  'Selected ' + separator.join(random_friends) + ' to tag' + Style.RESET_ALL)
     
-    if 'drop ' in tweet_content_low or 'wallet' in tweet_content_low:
+    if 'drop ' in tweet_content_low and ('wallet' in tweet_content_low or 'address' in tweet_content_low):
         #Wallet
         wlt_type = 'no'
         if 'sol' in tweet_content_low or '$sol' in tweet_content_low or 'solana':
@@ -145,10 +145,11 @@ def joinGiveaway(tweet):
             print('\n' + prefix_info + 'Already joined this giveaway')
         else:
             if APPEND_RANDOM_EMOTE:
-                comment = comment + ' ' + random.choice(EMOTES)
+                if needs_follow and needs_like and needs_rt:
+                    comment = comment + ' ' + random.choice(EMOTES)
 
             print(prefix + 'Posting comment: ' + comment)
-            #api.update_status(status=comment, in_reply_to_status_id=tweet.get('id') , auto_populate_reply_metadata=True)
+            api.update_status(status=comment, in_reply_to_status_id=tweet.get('id') , auto_populate_reply_metadata=True)
             print(prefix + Fore.LIGHTGREEN_EX + 'Successfull joined the giveaway' + Style.RESET_ALL)
             if(ENABLE_DEBUG):
                 dataToSave = {
@@ -159,8 +160,7 @@ def joinGiveaway(tweet):
                     'needsFollow': needs_follow,
                     'needsTag': needs_tag,
                     'needsWallet': needs_wlt,
-                    'comment': comment,
-                    'wallet': wlt_type
+                    'comment': comment
                 }
                 save_tweet(tweet.get('id_str'), dataToSave)
 
