@@ -6,7 +6,13 @@ One Paragraph of project description goes here
 
 1. Donwload the repository
 2. Extract the files
-3. Start the bot with 
+3. Navigate inside the bot folder
+```
+cd CryptoGiveawayBot
+```
+4. Rename `credentials.example.py` to `credentials.py`
+5. Paste your keys and tokens inside of it 
+6. Start the bot with
 ```
 python3 bot-no-gui.py
 ```
