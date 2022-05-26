@@ -1,6 +1,6 @@
 # CryptoGiveawayBot
 
-One Paragraph of project description goes here
+A bot that joins crypto giveaways from users you follow on twitter
 
 ## Getting Started
 
@@ -11,11 +11,12 @@ One Paragraph of project description goes here
 cd CryptoGiveawayBot
 ```
 4. Rename `credentials.example.py` to `credentials.py`
-5. Paste your keys and tokens inside of it 
+5. Paste your credentials inside of it
 6. Start the bot with
 ```
 python3 bot-no-gui.py
 ```
+If you dont know where to get your credentials, you can find a guide inside the [wiki](https://github.com/CryptoFoxDev/CryptoGiveawayBot/wiki)
 
 ## Built With
 
