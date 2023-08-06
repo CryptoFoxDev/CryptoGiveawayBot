@@ -1,5 +1,7 @@
 # CryptoGiveawayBot
 
+## Project discontinued due to API Paywalls
+
 A bot that joins crypto giveaways from users you follow on twitter
 
 ## Getting Started
